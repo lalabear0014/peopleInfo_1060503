@@ -17,7 +17,8 @@
             $this->load->view('template/footer');
         }
 
-        public function show() {
+        public function show($id) {
+            $data['records'] = $this->em->getDataById($id);
             $this->load->view('template/header');
             $this->load->view("events/show", $data);
             $this->load->view('template/footer');

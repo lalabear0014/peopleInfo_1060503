@@ -34,7 +34,7 @@
                 <tr>
                     <td><?= $rec->id ?></td>
                     <td>
-                        <a href="<?= base_url('events/show') ?>" class="btn btn-default"><?= $rec->name ?></a>
+                        <a href="<?= base_url('events/show/'.$rec->id) ?>" class="btn btn-default"><?= $rec->name ?></a>
                     </td>
                     <td><?= $rec->user_id ?></td>
                     <td><?= $rec->created_at ?></td>
