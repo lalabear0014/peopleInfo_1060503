@@ -6,12 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!--讓controller自動尋找url-->
+        <!--bootstrap-->
         <link rel="stylesheet" href="<?php echo site_url('bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
         <script type="text/javascript" src="<?php echo site_url('bower_components/jquery/dist/jquery.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo site_url('bower_components/jquery/dist/jquery-migrate.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo site_url('bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
-        <link rel="stylesheet" href="<?php echo site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'); ?>">        
-        <script type="text/javascript" src="<?php echo site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'); ?>"></script>        
+        <!--datetimepicker-->
+        <script type="text/javascript" src="<?php echo site_url('bower_components/moment/min/moment.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'); ?>"></script>
+        <link rel="stylesheet" href="<?php echo site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'); ?>">      
+        <!--dropzone-->
+        <script type="text/javascript" src="<?php echo site_url('bower_components/dropzone/dist/dropzone.js'); ?>"></script>
+        <link rel="stylesheet" href="<?php echo site_url('bower_components/dropzone/dist/dropzone.css'); ?>">      
+        
         <link rel="stylesheet" href="<?php echo site_url('bootstrap/css/mystyle.css'); ?>">
         <title>Document</title>
   </head>
@@ -28,11 +35,10 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav">
-          <li><a href="logout.php">登出</a></li>
-          <li><a href="changePassword.php">修改密碼</a></li>
           <li><a href="login.php">登入</a></li>
-          <li><a href="signup.php">註冊</a></li>          
-          <li><a href="<?= base_url('events/add') ?>">新增人員</a></li>
+          <li><a href="logout.php">登出</a></li>
+          <li><a href="changePassword.php">修改密碼</a></li>    
+          <li><a href="<?= base_url('events/add') ?>">新增人資</a></li>
         </ul>
         
         <!-- Search -->

@@ -1,5 +1,3 @@
-<!--<?php include_once('template/header'); ?>-->
-
 <div class="container">
   <div id="main" class="row">
     <form action="<?= base_url('events/submit') ?>" method="post" class="form-horizontal">
@@ -24,7 +22,7 @@
                 <input type="text" name="txt_station" class="form-control">
             </div>
             <label for="birthday" class="col-md-1 text-right">生日：</label>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class='input-group date' id='datetimepicker'> 	
                     <input type="text" name="txt_birthday" class="form-control">
                     <span class="input-group-addon">	
@@ -113,7 +111,7 @@
                 <textarea name="txt_effect" class="form-control"></textarea>
             </div>
         </div>
-
+        
         <div class="form-group">
             <label for="name" class="col-md-2 text-right"></label>
             <div class="col-md-10">
@@ -122,5 +120,12 @@
             </div>
         </div>
     </form>
+    <div class="form-group">
+        <label for="upload" class="col-md-2 text-right">檔案上傳：</label>
+        <div class="col-md-10">
+            <form action="upload.php" method="post" class="dropzone" enctype="multipart/form-data"></form>
+        </div>
+    </div>
+    
   </div>
 </div>
