@@ -8,26 +8,34 @@
             $this->load->model('event_model','em');
         }
 
+        public function search_keyword() {
+            $keyword = $this->input->post('keyword');
+            $data['records'] = $this->em->search($keyword);
+            $this->load->view('template/header');
+            $this->load->view('events/index', $data);
+            $this->load->view('template/footer');
+        }
+
         public function index() {
             // $this->load->model("event_model");
             // $data["records"] = $this->event_model->getData();
             $data['records'] = $this->em->getData();
             $this->load->view('template/header');
-            $this->load->view("events/index", $data);
+            $this->load->view('events/index', $data);
             $this->load->view('template/footer');
         }
 
         public function show($id) {
             $data['records'] = $this->em->getDataById($id);
             $this->load->view('template/header');
-            $this->load->view("events/show", $data);
+            $this->load->view('events/show', $data);
             $this->load->view('template/footer');
         }
 
         public function add() {
             $data['records'] = $this->em->getData();
             $this->load->view('template/header');
-            $this->load->view("events/add", $data);
+            $this->load->view('events/add', $data);
             $this->load->view('template/footer');
         }
 
@@ -45,7 +53,7 @@
         public function edit($id) {
             $data['records'] = $this->em->getDataById($id);
             $this->load->view('template/header');
-            $this->load->view("events/edit", $data);
+            $this->load->view('events/edit', $data);
             $this->load->view('template/footer');
         }
 

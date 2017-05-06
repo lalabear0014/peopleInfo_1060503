@@ -2,6 +2,17 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
 
     class Event_model extends CI_Model {
+        public function __construct() {
+            parent::__construct();
+        }
+
+        // 搜尋在events資料表資料的keyword
+        public function search($keyword) {
+            $this->db->like('name', $keyword);
+            $query = $this->db->get('events');
+            return $query->result();
+        }
+
         // 取得events資料表資料
         public function getData() {
             // 最新更新時間往上放
@@ -20,7 +31,7 @@
 
             $field = array(
                 'name' => $this->input->post('txt_name'),
-                'created_at' => date("Y/m/d H:i:s"),        // 創建時間
+                'created_at' => date('Y/m/d H:i:s'),        // 創建時間
                 'idnumber' => $this->input->post('txt_idnumber'),
                 'validate' => $this->input->post('txt_validate'),
                 'station' => $this->input->post('txt_station'),
@@ -66,7 +77,7 @@
 
             $field = array(
                 'name' => $this->input->post('txt_name'),
-                'updated_at' => date("Y/m/d H:i:s"),        // 更新時間
+                'updated_at' => date('Y/m/d H:i:s'),        // 更新時間
                 'idnumber' => $this->input->post('txt_idnumber'),
                 'validate' => $this->input->post('txt_validate'),
                 'station' => $this->input->post('txt_station'),

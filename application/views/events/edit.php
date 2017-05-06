@@ -122,5 +122,11 @@
             </div>
         </div>
     </form>
+    <div class="form-group">
+        <label for="upload" class="col-md-2 text-right">檔案上傳：</label>
+        <div class="col-md-10">
+            <form action="upload.php" method="post" class="dropzone" enctype="multipart/form-data"></form>
+        </div>
+    </div>
   </div>
 </div>

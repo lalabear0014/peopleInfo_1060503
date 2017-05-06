@@ -125,7 +125,6 @@
         <div class="col-md-10">
             <form action="upload.php" method="post" class="dropzone" enctype="multipart/form-data"></form>
         </div>
-    </div>
-    
+    </div>    
   </div>
 </div>

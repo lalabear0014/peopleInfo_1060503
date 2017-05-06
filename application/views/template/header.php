@@ -42,16 +42,16 @@
         </ul>
         
         <!-- Search -->
-        <form class="navbar-form navbar-left">
+        <div class="navbar-form navbar-left">
           <div class="form-group">
-            <form action="" method="post">
-              <input class="form-control" type="text" name="search" placeholder="search">
+            <form action="<?= base_url('events/search_keyword'); ?>" method="post">
+              <input class="form-control" type="text" name="keyword" placeholder="search">
               <button type="submit" class="btn btn-danger">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
               </button>
             </form>
           </div>
-        </form>
+        </div>
 
         <ul class="nav navbar-nav navbar-right">
           <li>
