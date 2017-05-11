@@ -16,13 +16,11 @@
         }
 
         public function validate($data) {
-            
-            $query = $this->db->get('users');
+            $this->db->from('users');
+            $this->db->where('name', $data['username']);
+            $this->db->where('password', $data['password']);            
+            $query = $this->db->get();
+            return ($query->num_rows() == 1);
         }
-
-        public function logSession($sessionData) {
-
-        }
-
     }
 ?>
