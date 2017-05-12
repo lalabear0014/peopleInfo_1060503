@@ -24,6 +24,7 @@
   </head>
 
   <body>
+    <?php $logined = $this->session->userdata('user'); ?>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -35,9 +36,12 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <ul class="nav navbar-nav">
-          <li><a href="login.php">登入</a></li>
-          <li><a href="logout.php">登出</a></li>
-          <li><a href="changePassword.php">修改密碼</a></li>    
+          <?php if ((is_null($logined)) || ($logined == ""))
+                  echo "<li><a href='".base_url('users/index')."'>登入</a></li>";
+                else
+                  echo "<li><a href='".base_url('users/logout')."'>登出</a></li>";;
+          ?>
+          <li><a href="<?= base_url('users/changePassword') ?>">修改密碼</a></li>    
           <li><a href="<?= base_url('events/add') ?>">新增人資</a></li>
         </ul>
         
