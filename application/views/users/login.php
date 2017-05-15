@@ -4,7 +4,7 @@
             <div class="panel-heading">Login to Your Account</div>
             <div class="panel-body">     
             <!-- Login Form -->
-            <form action="<?= base_url('users/loginProcess') ?>" method="post" role="form">    
+            <form action="<?= base_url('users/login') ?>" method="post" role="form">    
                 <!-- Username Field -->
                 <div class="row">
                     <div class="form-group col-xs-12">

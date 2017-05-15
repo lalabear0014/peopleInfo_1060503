@@ -22,6 +22,40 @@
             $query = $this->db->get();
             return ($query->num_rows() == 1);
         }
-        
+
+        public function getDataByName($name) {
+            $this->db->where('name', $name);
+            $query = $this->db->get('users');
+            if ($query->num_rows() > 0) {
+                return $query->row();
+            }
+            else {
+                return false;
+            }
+        }
+
+        public function updatePwd() {
+            $name = $this->input->post('txt_hidden');
+            date_default_timezone_set("Asia/Taipei");
+
+            $newpwd = $this->input->post('NewPassword');
+            $confirmpwd = $this->input->post('ConfirmPassword');
+            
+            if ($newpwd == $confirmpwd) {
+                $field = array(
+                    'password' => $this->input->post('NewPassword'),
+                    'updated_at' => date('Y/m/d H:i:s')        // 更新時間
+                );
+                $this->db->where('name', $name);
+                $this->db->update('users', $field);
+                if ($this->db->affected_rows() > 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } 
+        }
+
     }
 ?>

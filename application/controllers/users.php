@@ -19,7 +19,7 @@
             }
         }
 
-        public function loginProcess() {
+        public function login() {
             $this->load->model('user_model');
             if (isset($_SESSION['user']) && ($_SESSION['user'] != "")) {
                 $this->session->unset_userdata('user');
@@ -57,15 +57,49 @@
             redirect(base_url('events/index'));
         }
 
-        public function changePassword() {
+        public function changePwd($name) {
+            $this->load->model('user_model');
+            $data['records'] = $this->user_model->getDataByName($name);
             if (isset($_SESSION['user']) && ($_SESSION['user'] != "")) {
                 $this->load->view('template/header');
-                $this->load->view('users/changepwd');
+                $this->load->view('users/changepwd', $data);
                 $this->load->view('template/footer');
             }
-            $this->load->view('template/header');
-            $this->load->view('users/login');
-            $this->load->view('template/footer');
+            else {
+                $this->load->view('template/header');
+                $this->load->view('users/login');
+                $this->load->view('template/footer');
+            }  
+        }
+
+        public function updatePwd() {
+            $this->load->model('user_model');
+           
+            $Message = array();
+            $username = trim($_POST['txt_hidden']);
+            $password = trim($_POST['OldPassword']);
+            $data = array(
+                'username' => $username,
+                'password' => $password
+            );
+            
+            if ($this->user_model->validate($data)) {
+                $result = $this->user_model->updatePwd();
+                if ($result) {
+                    $this->session->set_flashdata('success_msg', 'Record updated successfully');
+                }
+                else {
+                    $this->session->set_flashdata('error_msg', 'Fail to update record');
+                }
+                redirect(base_url('events/index'));
+            }
+            else {
+                $Message['username'] = $username;
+                $Message['errorMessage'] = "OldPassword isn't correct";
+                $this->load->view('template/header');
+                $this->load->view('users/changepwd', $Message);
+                $this->load->view('template/footer');
+            }  
         }
 
     }
