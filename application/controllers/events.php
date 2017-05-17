@@ -78,5 +78,22 @@
             }
             redirect(base_url('events/index'));
         }
+
+        public function upload() {
+            if (!empty($_FILES)) {
+                $tempFile = $_FILES['file']['tmp_name'];
+                $fileName = $_FILES['file']['name'];
+                $fileNameElement = explode('.', $fileName);
+                $targetPath = getcwd().'/uploads/';
+                $targetFile = $targetPath.$fileNameElement[0].date('YmdHis').'.'.$fileNameElement[1];
+                move_uploaded_file($tempFile, $targetFile);
+                // if you want to save in db,where here
+                // with out model just for example
+                // $this->load->database(); // load database
+                // $this->db->insert('file_table',array('file_name' => $fileName));
+            }
+            redirect(base_url('events/show'));
+        }
+
     }
 ?>

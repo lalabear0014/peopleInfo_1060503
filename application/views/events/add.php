@@ -15,7 +15,8 @@
         <div class="form-group">
             <label for="validate" class="col-md-2 text-right">資審：</label>
             <div class="col-md-2">
-                <input type="text" name="txt_validate" class="form-control">
+                <input type="radio" name="rd_validate" value="yes">是
+                <input type="radio" name="rd_validate" value="no">否
             </div>
             <label for="station" class="col-md-1 text-right">駐地：</label>
             <div class="col-md-2">
@@ -39,11 +40,12 @@
 
         <div class="form-group">
             <label for="gender" class="col-md-2 text-right">性別：</label>
-            <div class="col-md-4">
-                <input type="text" name="txt_gender" class="form-control">
+            <div class="col-md-2">
+                <input type="radio" name="rd_gender" value="boy">男
+                <input type="radio" name="rd_gender" value="girl">女
             </div>
-            <label for="education" class="col-md-2 text-right">學歷：</label>
-            <div class="col-md-4">
+            <label for="education" class="col-md-1 text-right">學歷：</label>
+            <div class="col-md-7">
                 <textarea name="txt_education" class="form-control"></textarea>
             </div>
         </div>
@@ -120,11 +122,6 @@
             </div>
         </div>
     </form>
-    <div class="form-group">
-        <label for="upload" class="col-md-2 text-right">檔案上傳：</label>
-        <div class="col-md-10">
-            <form action="upload.php" method="post" class="dropzone" enctype="multipart/form-data"></form>
-        </div>
-    </div>    
+        
   </div>
 </div>

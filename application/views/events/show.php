@@ -13,34 +13,53 @@
 
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="info">
-			<b>個人資料：</b>
-			<dl class="dl-horizontal">
-				<dt>證號：</dt>
-				<dd><?= $records->idnumber; ?></dd>
-				<dt>資審：</dt>
-				<dd><?= $records->name; ?></dd>
-				<dt>駐地：</dt>
-				<dd><?= $records->station; ?></dd>
-				<dt>生日：</dt>
-				<dd><?= $records->birthday; ?></dd>
-				<dt>性別：</dt>
-				<dd>女</dd>
-				<dt>學歷：</dt>
-				<dd><?= $records->education; ?></dd>
-				<dt>經歷：</dt>
-				<dd><?= $records->experience; ?></dd>
-			</dl>
-			<b>聯繫方式：</b>
-			<dl class="dl-horizontal">
-				<dt>電話：</dt>
-				<dd><?= $records->phone; ?></dd>
-				<dt>即時通訊：</dt>
-				<dd><?= $records->contact; ?></dd>
-				<dt>電郵：</dt>
-				<dd><?= $records->email; ?></dd>
-				<dt>地址：</dt>
-				<dd><?= $records->address; ?></dd>
-			</dl>
+			<div class="form-group">
+				<label class="col-md-2 text-right">個人資料：</label>
+				<div class="col-md-10">
+					<table class="table table-bordered">
+						<tr>
+							<th>證號：</th><td><?= $records->idnumber; ?></td>
+						</tr>
+						<tr>
+							<th>資審：</th><td><?= $records->validate; ?></td>
+						</tr>
+						<tr>
+							<th>駐地：</th><td><?= $records->station; ?></td>
+						</tr>
+						<tr>
+							<th>生日：</th><td><?= $records->birthday; ?></td>
+						</tr>
+						<tr>
+							<th>性別：</th><td><?= $records->gender; ?></td>
+						</tr>
+						<tr>
+							<th>學歷：</th><td><?= $records->education; ?></td>
+						</tr>
+						<tr>
+							<th>經歷：</th><td><?= $records->experience; ?></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 text-right">聯繫方式：</label>
+				<div class="col-md-10">
+					<table class="table table-bordered">
+						<tr>
+							<th>電話：</th><td><?= $records->phone; ?></td>
+						</tr>
+						<tr>
+							<th>即時通訊：</th><td><?= $records->contact; ?></td>
+						</tr>
+						<tr>
+							<th>電郵：</th><td><?= $records->email; ?></td>
+						</tr>
+						<tr>
+							<th>地址：</th><td><?= $records->address; ?></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 
 		<div role="tabpanel" class="tab-pane" id="process">
@@ -59,7 +78,24 @@
 			<?= $records->effect; ?>	
 		</div>
 		<div role="tabpanel" class="tab-pane" id="upload">
-				
+			<div class="form-group">
+				<label class="col-md-2 text-right">檔案上傳：</label>
+				<div class="col-md-10">
+					<form action="<?= site_url('events/upload'); ?>" method="post" class="dropzone" enctype="multipart/form-data" name="uploadData"></form>
+				</div>
+				<label class="col-md-2 text-right">現有檔案：</label>
+				<div class="col-md-10">			
+					<?php $targetDir = "C:/xampp/htdocs/CodeIgniter-3.1.3/uploads/"; ?>
+					<?php $files = array_diff(scandir($targetDir), array('..', '.')); ?>
+					<?php $targetPath = site_url('uploads/'); ?>
+
+					<?php
+						foreach ($files as $value) {
+							echo "<a href='".$targetPath.$value."'>".$value."</a><br>";
+						}
+					?>
+				</div>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="message">
 				
