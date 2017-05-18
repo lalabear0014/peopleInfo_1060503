@@ -116,5 +116,19 @@
                 return false;
             }
         }
+
+        // public function record_count() {
+        //     return $this->db->get('events')->result();
+        // }
+
+        // // Fetch data according to per_page limit.
+        // public function fetch_data($limit, $row) {
+        //     return $this->db->get('events', $limit, $row)->result();
+        // }
+
+        public function pdf($id) {
+            
+        }
+
     }
 ?>
