@@ -1,18 +1,18 @@
 <div class="container">
 	<h1><b><?= $records->name; ?></b></h1>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="#info" data-toggle="tab">基本資料</a></li>
+		<li><a href="#info" data-toggle="tab">基本資料</a></li>
 		<li><a href="#process" data-toggle="tab">接觸經過</a></li>
 		<li><a href="#assess" data-toggle="tab">考核策進</a></li>
 		<li><a href="#use" data-toggle="tab">運用規劃</a></li>
 		<li><a href="#money" data-toggle="tab">匯補紀錄</a></li>
 		<li><a href="#effect" data-toggle="tab">工作成效</a></li>
 		<li><a href="#upload" data-toggle="tab">檔案上傳</a></li>
-		<li><a href="#message" data-toggle="tab">留言訊息</a></li>
+		<li class="active"><a href="#message" data-toggle="tab">留言訊息</a></li>
 	</ul>
 
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="info">
+		<div role="tabpanel" class="tab-pane" id="info">
 			<div class="form-group">
 				<label class="col-md-2 text-right">個人資料：</label>
 				<div class="col-md-10">
@@ -97,8 +97,32 @@
 				</div>
 			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane" id="message">
-				
+		<div role="tabpanel" class="tab-pane active" id="message">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>項次</th>
+						<th>內容</th>
+						<th>作者</th>
+						<th>創建時間</th>
+					</tr>
+					<?php foreach ($results as $rec) :?>
+						<?php date_default_timezone_set("Asia/Taipei"); ?>
+						<tr>
+							<td><?= $rec->id; ?></td>
+							<td><?= $rec->info; ?></td>
+							<td><?= $rec->author; ?></td>
+							<td><?= $rec->created_at; ?></td>	
+						</tr>
+					<?php endforeach; ?>
+				</thead>
+			</table>
+			<!-- Show pagination links -->
+			<?php
+				foreach ($links as $link) {
+					echo $link;
+				}
+			?>
 		</div>
 	</div>
 </div>

@@ -6,6 +6,7 @@
         public function __construct() {
             parent:: __construct();
             $this->load->model('event_model','em');
+            $this->load->model('message_model','mm');
             $this->load->library('pagination');
         }
 
@@ -69,7 +70,35 @@
         }
 
         public function show($id) {
-            $data['records'] = $this->em->getDataById($id);            
+            $data['records'] = $this->em->getDataById($id);
+
+            // show message ================================
+            $config["base_url"] = base_url('events/show/'.$id);
+            $config["per_page"] = 5;
+            $page = $this->uri->segment(4);
+            $query1 = $this->db->get('messages', $config["per_page"], $page);
+            $data["results"] = $query1->result();
+            $query2 = $this->db->get('messages');
+            $config["total_rows"] = $query2->num_rows();
+            $config['full_tag_open'] = '<u class="pagination">';
+            $config['full_tag_close'] = '</u>';
+            $config['first_tag_open'] = '<li class="page-item">';
+            $config['last_tag_open'] = '<li class="page-item">';
+            $config['next_tag_open'] = '<li class="page-item">';
+            $config['prev_tag_open'] = '<li class="page-item">';
+            $config['num_tag_open'] = '<li class="page-item">';
+            $config['num_tag_close'] = '</li>';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_tag_close'] = '</li>';
+            $config['first_tag_close'] = '</li>';
+            $config['last_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="active"><span><b>';
+            $config['cur_tag_close'] = '</b></span></li>';
+            $this->pagination->initialize($config);         
+            $str_links = $this->pagination->create_links();
+            $data["links"] = explode('&nbsp;', $str_links );
+            // end of message ================================            
+
             $this->load->view('template/header');
             $this->load->view('events/show', $data);
             $this->load->view('template/footer');
@@ -138,50 +167,32 @@
             redirect(base_url('events/show'));
         }
 
-        public function page() {
-            $config = array();
-            $config["base_url"] = base_url('events/index');
-            $total_row = $this->em->record_count();
-            $config["total_rows"] = $total_row;
-            $config["per_page"] = 5;
-            $config['use_page_numbers'] = TRUE;
-            $config['num_links'] = $total_row;
-            $config['cur_tag_open'] = '&nbsp;<a class="current">';
-            $config['cur_tag_close'] = '</a>';
-            $config['next_link'] = 'Next';
-            $config['prev_link'] = 'Previous';
+        public function pdf() {
+            $this->load->library('pdf');
+            /*
+                ---- ---- ---- ----
+                your code here
+                ---- ---- ---- ----
+            */
+            $this->load->view('events/pdfreport');
+        }
 
-            $this->pagination->initialize($config);
-            if ($this->uri->segment(3)) {
-                $page = ($this->uri->segment(3)) ;
+        public function add_msg() {
+            $data['records'] = $this->mm->getData();
+            $this->load->view('template/header');
+            $this->load->view('events/addmsg', $data);
+            $this->load->view('template/footer');
+        }
+
+        public function submit_msg() {
+            $result = $this->mm->submit();
+            if ($result) {
+                $this->session->set_flashdata('success_msg', 'Record added successfully');
             }
             else {
-                $page = 1;
+                $this->session->set_flashdata('error_msg', 'Fail to add record');
             }
-            $data["results"] = $this->em->fetch_data($config["per_page"], $page);
-            $str_links = $this->pagination->create_links();
-            $data["links"] = explode('&nbsp;', $str_links );
-
-            // View data according to array.
-            $this->load->view('template/header');
-            $this->load->view('events/index', $data);
-            $this->load->view('template/footer');         
-            
-            // $config['base_url'] = site_url('events/page');
-            // // 資料庫總數
-            // $config['total_rows'] = 200;
-            // // 每頁顯示?筆資料
-            // $config['per_page'] = $page_size; 
-
-            // $this->pagination->initialize($config);
-            // $offset = $this->uri->segment(3);
-            // $sql = "select * from users imit $offset, $page_size";
-            // echo $sql;
-
-            // $data['links'] = $this->pagination->create_links();
-            // $this->load->view('template/header');
-            // $this->load->view('events/index', $data);
-            // $this->load->view('template/footer');
+            redirect(base_url('events/show'));
         }
 
     }
