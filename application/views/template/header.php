@@ -7,19 +7,19 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!--讓controller自動尋找url-->
         <!--bootstrap-->
-        <link rel="stylesheet" href="<?php echo site_url('bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
-        <script type="text/javascript" src="<?php echo site_url('bower_components/jquery/dist/jquery.min.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo site_url('bower_components/jquery/dist/jquery-migrate.min.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo site_url('bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+        <link rel="stylesheet" href="<?= site_url('bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
+        <script type="text/javascript" src="<?= site_url('bower_components/jquery/dist/jquery.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?= site_url('bower_components/jquery/dist/jquery-migrate.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?= site_url('bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
         <!--datetimepicker-->
-        <script type="text/javascript" src="<?php echo site_url('bower_components/moment/min/moment.min.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'); ?>"></script>
-        <link rel="stylesheet" href="<?php echo site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'); ?>">      
+        <script type="text/javascript" src="<?= site_url('bower_components/moment/min/moment.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?= site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'); ?>"></script>
+        <link rel="stylesheet" href="<?= site_url('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'); ?>">      
         <!--dropzone-->
-        <script type="text/javascript" src="<?php echo site_url('bower_components/dropzone/dist/dropzone.js'); ?>"></script>
-        <link rel="stylesheet" href="<?php echo site_url('bower_components/dropzone/dist/dropzone.css'); ?>">      
+        <script type="text/javascript" src="<?= site_url('bower_components/dropzone/dist/dropzone.js'); ?>"></script>
+        <link rel="stylesheet" href="<?= site_url('bower_components/dropzone/dist/dropzone.css'); ?>">      
         
-        <link rel="stylesheet" href="<?php echo site_url('bootstrap/css/mystyle.css'); ?>">
+        <link rel="stylesheet" href="<?= site_url('bootstrap/css/mystyle.css'); ?>">
         <title>Document</title>
   </head>
 
@@ -79,7 +79,7 @@
               <!-- data-toggle視窗切換 -->
               <!-- aria-haspopup觸控暫留 -->
               <!-- aria-expanded展開狀態 -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="<?= base_url('events/index'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 小朋友
                 <!-- caret內均可再點入查詢 -->
               <span class="caret"></span>
@@ -87,12 +87,9 @@
             <!-- 下拉選單 -->
             <!--<% if current_user %>-->
             <ul class="dropdown-menu">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
+              <?php foreach ($records as $rec) :?>
+                <li><?= $rec->fullname; ?></li>
+              <?php endforeach; ?>
             </ul>
           </li><!-- end of dropdown -->
         </ul><!--end of navbar-right -->

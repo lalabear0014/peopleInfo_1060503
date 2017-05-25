@@ -6,6 +6,7 @@
         public function __construct() {
             parent:: __construct();
             $this->load->model('event_model','em');
+            $this->load->model('user_model', 'um');
             $this->load->model('message_model','mm');
             $this->load->library('pagination');
         }
@@ -19,6 +20,8 @@
         }
 
         public function index() {
+            // user_list
+            $data['records'] = $this->um->getData();
             // 分頁
             $config["base_url"] = base_url('events/index');
             // 每頁?筆資料
@@ -56,8 +59,8 @@
             $str_links = $this->pagination->create_links();
             $data["links"] = explode('&nbsp;', $str_links );           
 
-            $this->load->view('template/header');
-            $this->load->view('events/index', $data);
+            $this->load->view('template/header', $data);    // $data['records']
+            $this->load->view('events/index', $data);       // $data["results"], $data["links"]
             $this->load->view('template/footer');
 
             // $this->load->model("event_model");
