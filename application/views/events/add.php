@@ -115,7 +115,7 @@
         </div>
         
         <div class="form-group">
-            <label for="name" class="col-md-2 text-right"></label>
+            <label class="col-md-2 text-right"></label>
             <div class="col-md-10">
                 <input type="submit" name="btnSave" class="btn btn-primary" value="Save">
                 <a href="<?= base_url('events/index') ?>" class="btn btn-primary">Back</a>

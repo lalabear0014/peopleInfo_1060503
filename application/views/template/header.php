@@ -45,7 +45,7 @@
                 }
           ?> 
         </ul>
-        
+      
         <!-- Search -->
         <div class="navbar-form navbar-left">
           <div class="form-group">
@@ -61,17 +61,17 @@
         <ul class="nav navbar-nav navbar-right">
           <li>
           <!-- 確認@event存在且已存在資料庫 -->
-            <a href="pdf">檔案列印(PDF)</a>
+            <a href="<?= base_url('events/pdf'); ?>">檔案列印(PDF)</a>
           </li>
           
           <!--<% if @event && @event.save %>
           <% if current_user.admin? || current_user.boss? %>-->
           <li>
-            <a href="">指導</a>
+            <a href="<?= base_url('events/add_msg'); ?>">指導</a>
           </li>
           <!--<% else %>-->
           <li>
-            <a href="">處理</a>
+            <a href="<?= base_url('events/add_msg'); ?>">處理</a>
           </li>
           <!--<% end %>
           <% end %>-->
