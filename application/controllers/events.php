@@ -11,56 +11,16 @@
             $this->load->library('pagination');
         }
 
-        public function search_keyword() {
-            $keyword = $this->input->post('keyword');
-            $data['records'] = $this->em->search($keyword);
-            $this->load->view('template/header');
-            $this->load->view('events/index', $data);
-            $this->load->view('template/footer');
-        }
-
         public function index() {
             // user_list
-            $data['records'] = $this->um->getData();
-            // 分頁
-            $config["base_url"] = base_url('events/index');
-            // 每頁?筆資料
-            $config["per_page"] = 5;
-            $page = $this->uri->segment(3);
-            // 從資料表抓取每頁資料數
-            $query1 = $this->db->get('events', $config["per_page"], $page);
-            $data["results"] = $query1->result();
-            // 從資料表抓取所有資料數
-            $query2 = $this->db->get('events');
-            $config["total_rows"] = $query2->num_rows();
-            // 分頁呈現方式
-            $config['full_tag_open'] = '<u class="pagination">';
-            $config['full_tag_close'] = '</u>';
-            // 第一頁及最後一頁
-            $config['first_tag_open'] = '<li class="page-item">';
-            $config['last_tag_open'] = '<li class="page-item">';
-            // 前一頁及下一頁
-            $config['next_tag_open'] = '<li class="page-item">';
-            $config['prev_tag_open'] = '<li class="page-item">';
-            // 頁碼
-            $config['num_tag_open'] = '<li class="page-item">';
-            $config['num_tag_close'] = '</li>';
+            $data['users'] = $this->um->getData();
 
-            $config['next_tag_close'] = '</li>';
-            $config['prev_tag_close'] = '</li>';
-            $config['first_tag_close'] = '</li>';
-            $config['last_tag_close'] = '</li>';
-            // 當前頁面
-            $config['cur_tag_open'] = '<li class="active"><span><b>';
-            $config['cur_tag_close'] = '</b></span></li>';
-            // config初始化
-            $this->pagination->initialize($config);         
-            
-            $str_links = $this->pagination->create_links();
-            $data["links"] = explode('&nbsp;', $str_links );           
+            // pagination
+            $keyword = $this->input->post('keyword');
+            $data = $this->em->page($keyword);           
 
-            $this->load->view('template/header', $data);    // $data['records']
-            $this->load->view('events/index', $data);       // $data["results"], $data["links"]
+            $this->load->view('template/header', $data);    // $data['users']
+            $this->load->view('events/index', $data);       // $data["records"], $data["links"]
             $this->load->view('template/footer');
 
             // $this->load->model("event_model");
@@ -190,10 +150,10 @@
         public function submit_msg() {
             $result = $this->mm->submit();
             if ($result) {
-                $this->session->set_flashdata('success_msg', 'Record added successfully');
+                $this->session->set_flashdata('success_msg', 'Record added messages successfully');
             }
             else {
-                $this->session->set_flashdata('error_msg', 'Fail to add record');
+                $this->session->set_flashdata('error_msg', 'Fail to add message');
             }
             redirect(base_url('events/show'));
         }

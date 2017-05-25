@@ -34,65 +34,62 @@
           </a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <ul class="nav navbar-nav">
-          <?php if ((is_null($logined)) || ($logined == ""))
-                  echo "<li><a href='".base_url('users/index')."'>登入</a></li>";
-                else {
-                  echo "<li><a href='".base_url('users/logout')."'>登出</a></li>";
-                  echo "<li><a href='".base_url('users/changePwd/'.$logined)."'>修改密碼</a></li>";   
-                  echo "<li><a href='".base_url('events/add')."'>新增人資</a></li>";
-                }
-          ?> 
-        </ul>
-      
-        <!-- Search -->
-        <div class="navbar-form navbar-left">
-          <div class="form-group">
-            <form action="<?= base_url('events/search_keyword'); ?>" method="post">
-              <input class="form-control" type="text" name="keyword" placeholder="search">
-              <button type="submit" class="btn btn-danger">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              </button>
-            </form>
-          </div>
-        </div>
+        <?php if (!(is_null($logined)) || ($logined != "")) { ?>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <ul class="nav navbar-nav">
+            <li><a href="<?= base_url('users/logout'); ?>">登出</a></li>
+            <li><a href="<?= base_url('users/changePwd/'.$logined); ?>">修改密碼</a></li>
+            <li><a href="<?= base_url('events/add'); ?>">新增人資</a></li>
+          </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-          <!-- 確認@event存在且已存在資料庫 -->
-            <a href="<?= base_url('events/pdf'); ?>">檔案列印(PDF)</a>
-          </li>
-          
-          <!--<% if @event && @event.save %>
-          <% if current_user.admin? || current_user.boss? %>-->
-          <li>
-            <a href="<?= base_url('events/add_msg'); ?>">指導</a>
-          </li>
-          <!--<% else %>-->
-          <li>
-            <a href="<?= base_url('events/add_msg'); ?>">處理</a>
-          </li>
-          <!--<% end %>
-          <% end %>-->
-          <li class="dropdown">
-              <!-- data-toggle視窗切換 -->
-              <!-- aria-haspopup觸控暫留 -->
-              <!-- aria-expanded展開狀態 -->
-            <a href="<?= base_url('events/index'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                小朋友
-                <!-- caret內均可再點入查詢 -->
-              <span class="caret"></span>
-            </a>
-            <!-- 下拉選單 -->
-            <!--<% if current_user %>-->
-            <ul class="dropdown-menu">
-              <?php foreach ($records as $rec) :?>
-                <li><?= $rec->fullname; ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </li><!-- end of dropdown -->
-        </ul><!--end of navbar-right -->
+          <!-- Search -->
+          <div class="navbar-form navbar-left">
+            <div class="form-group">
+              <form action="<?= base_url('events/index'); ?>" method="post">
+                <input class="form-control" type="text" name="keyword" placeholder="search">
+                <button type="submit" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+            <!-- 確認@event存在且已存在資料庫 -->
+              <a href="<?= base_url('events/pdf'); ?>">檔案列印(PDF)</a>
+            </li>
+            
+            <!--<% if @event && @event.save %>
+            <% if current_user.admin? || current_user.boss? %>-->
+            <li>
+              <a href="<?= base_url('events/add_msg'); ?>">指導</a>
+            </li>
+            <!--<% else %>-->
+            <li>
+              <a href="<?= base_url('events/add_msg'); ?>">處理</a>
+            </li>
+            <!--<% end %>
+            <% end %>-->
+            <li class="dropdown">
+                <!-- data-toggle視窗切換 -->
+                <!-- aria-haspopup觸控暫留 -->
+                <!-- aria-expanded展開狀態 -->
+              <a href="<?= base_url('events/index'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  小朋友
+                  <!-- caret內均可再點入查詢 -->
+                <span class="caret"></span>
+              </a>
+              <!-- 下拉選單 -->
+              <!--<% if current_user %>-->
+              <ul class="dropdown-menu">
+                <?php foreach ($users as $user) :?>
+                  <li><?= $user->fullname; ?></li>
+                <?php endforeach; ?>
+              </ul>
+            </li><!-- end of dropdown -->
+          </ul><!--end of navbar-right -->
+        <?php } ?>
       </div><!-- /.container-fluid -->
     </nav><!--end of navbar-inverse -->
 

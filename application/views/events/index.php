@@ -16,7 +16,7 @@
                 <th>創建時間</th>
                 <th>功能</th>
             </tr>
-            <?php foreach ($results as $rec) :?>
+            <?php foreach ($records as $rec) :?>
                 <?php date_default_timezone_set("Asia/Taipei"); ?>
                 <tr>
                     <td><?= $rec->id; ?></td>
