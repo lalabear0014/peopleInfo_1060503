@@ -13,13 +13,15 @@
 
         public function index() {
             // user_list
-            $data['users'] = $this->um->getData();
+            $head['users'] = $this->um->getData();
+            $head['records'] = $this->em->getData();
+            $head['show'] = false;
 
             // pagination
             $keyword = $this->input->post('keyword');
             $data = $this->em->page($keyword);           
 
-            $this->load->view('template/header', $data);    // $data['users']
+            $this->load->view('template/header', $head);    // $user['users']
             $this->load->view('events/index', $data);       // $data["records"], $data["links"]
             $this->load->view('template/footer');
 
@@ -32,44 +34,26 @@
             // $data["results"] = $this->em->fetch_data($config["per_page"], $page);
         }
 
-        public function show($id) {
-            $data['records'] = $this->em->getDataById($id);
+        public function show($event_id) {
+            // user_list
+            $head['users'] = $this->um->getData();
+            $head['records'] = $this->em->getDataById($event_id);
+            $head['show'] = true;
 
-            // show message ================================
-            $config["base_url"] = base_url('events/show/'.$id);
-            $config["per_page"] = 5;
-            $page = $this->uri->segment(4);
-            $query1 = $this->db->get('messages', $config["per_page"], $page);
-            $data["results"] = $query1->result();
-            $query2 = $this->db->get('messages');
-            $config["total_rows"] = $query2->num_rows();
-            $config['full_tag_open'] = '<u class="pagination">';
-            $config['full_tag_close'] = '</u>';
-            $config['first_tag_open'] = '<li class="page-item">';
-            $config['last_tag_open'] = '<li class="page-item">';
-            $config['next_tag_open'] = '<li class="page-item">';
-            $config['prev_tag_open'] = '<li class="page-item">';
-            $config['num_tag_open'] = '<li class="page-item">';
-            $config['num_tag_close'] = '</li>';
-            $config['next_tag_close'] = '</li>';
-            $config['prev_tag_close'] = '</li>';
-            $config['first_tag_close'] = '</li>';
-            $config['last_tag_close'] = '</li>';
-            $config['cur_tag_open'] = '<li class="active"><span><b>';
-            $config['cur_tag_close'] = '</b></span></li>';
-            $this->pagination->initialize($config);         
-            $str_links = $this->pagination->create_links();
-            $data["links"] = explode('&nbsp;', $str_links );
-            // end of message ================================            
+            $data = $this->em->showMsg($event_id);           
 
-            $this->load->view('template/header');
+            $this->load->view('template/header', $head);
             $this->load->view('events/show', $data);
             $this->load->view('template/footer');
         }
 
         public function add() {
+            // user_list
+            $user['users'] = $this->um->getData();
+            $user['show'] = false;
+            
             $data['records'] = $this->em->getData();
-            $this->load->view('template/header');
+            $this->load->view('template/header', $user);
             $this->load->view('events/add', $data);
             $this->load->view('template/footer');
         }
@@ -85,9 +69,13 @@
             redirect(base_url('events/index'));
         }
 
-        public function edit($id) {
-            $data['records'] = $this->em->getDataById($id);
-            $this->load->view('template/header');
+        public function edit($event_id) {
+            // user_list
+            $user['users'] = $this->um->getData();
+            $user['show'] = false;
+
+            $data['records'] = $this->em->getDataById($event_id);
+            $this->load->view('template/header', $user);
             $this->load->view('events/edit', $data);
             $this->load->view('template/footer');
         }
@@ -103,8 +91,8 @@
             redirect(base_url('events/index'));
         }
 
-        public function delete($id) {
-            $result = $this->em->delete($id);
+        public function delete($event_id) {
+            $result = $this->em->delete($event_id);
             if ($result) {
                 $this->session->set_flashdata('success_msg', 'Record deleted successfully');
             }
@@ -140,14 +128,19 @@
             $this->load->view('events/pdfreport');
         }
 
-        public function add_msg() {
-            $data['records'] = $this->mm->getData();
-            $this->load->view('template/header');
+        public function add_msg($event_id) {
+            // user_list
+            $head['users'] = $this->um->getData();
+            $head['records'] = $this->em->getDataById($event_id);
+            $head['show'] = false;
+
+            $data['records'] = $this->mm->getDataByEventId($event_id);
+            $this->load->view('template/header', $head);
             $this->load->view('events/addmsg', $data);
             $this->load->view('template/footer');
         }
 
-        public function submit_msg() {
+        public function submit_msg($event_id) {
             $result = $this->mm->submit();
             if ($result) {
                 $this->session->set_flashdata('success_msg', 'Record added messages successfully');
@@ -155,7 +148,7 @@
             else {
                 $this->session->set_flashdata('error_msg', 'Fail to add message');
             }
-            redirect(base_url('events/show'));
+            redirect(base_url('events/show/'.$event_id));
         }
 
     }

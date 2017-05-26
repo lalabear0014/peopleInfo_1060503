@@ -2,11 +2,11 @@
   <div id="main" class="row">
     <form action="<?= base_url('events/update') ?>" method="post" class="form-horizontal">
         <!--傳送隱藏訊息(id)-->
-        <input type="hidden" name="txt_hidden" value="<?= $records->id; ?>">
+        <input type="hidden" name="hidden_event_id" value="<?= $records->event_id; ?>">
         <div class="form-group">
             <label for="name" class="col-md-2 text-right">姓名：</label>
             <div class="col-md-4">
-                <input type="text" name="txt_name" class="form-control" value="<?= $records->name; ?>" required>
+                <input type="text" name="txt_event_name" class="form-control" value="<?= $records->event_name; ?>" required>
             </div>
             <label for="idnumber" class="col-md-2 text-right">證號：</label>
             <div class="col-md-4">

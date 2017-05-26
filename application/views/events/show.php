@@ -1,5 +1,5 @@
 <div class="container">
-	<h1><b><?= $records->name; ?></b></h1>
+	<h1><b><?= $records->event_name; ?></b></h1>
 	<ul class="nav nav-tabs">
 		<li><a href="#info" data-toggle="tab">基本資料</a></li>
 		<li><a href="#process" data-toggle="tab">接觸經過</a></li>
@@ -111,7 +111,7 @@
 						<tr>
 							<td><?= $rec->id; ?></td>
 							<td><?= $rec->info; ?></td>
-							<td><?= $rec->author; ?></td>
+							<td><?= $rec->user_name; ?></td>
 							<td><?= $rec->created_at; ?></td>	
 						</tr>
 					<?php endforeach; ?>

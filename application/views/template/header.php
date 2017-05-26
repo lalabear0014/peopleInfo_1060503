@@ -55,26 +55,29 @@
           </div>
 
           <ul class="nav navbar-nav navbar-right">
-            <li>
-            <!-- 確認@event存在且已存在資料庫 -->
-              <a href="<?= base_url('events/pdf'); ?>">檔案列印(PDF)</a>
-            </li>
-            
-            <!--<% if @event && @event.save %>
-            <% if current_user.admin? || current_user.boss? %>-->
-            <li>
-              <a href="<?= base_url('events/add_msg'); ?>">指導</a>
-            </li>
-            <!--<% else %>-->
-            <li>
-              <a href="<?= base_url('events/add_msg'); ?>">處理</a>
-            </li>
-            <!--<% end %>
-            <% end %>-->
+            <!-- 確認點入event顯示頁面 -->
+            <?php if ($show) { ?>
+              <li>
+                <a href="<?= base_url('events/pdf'); ?>">檔案列印(PDF)</a> 
+              </li>
+              <?php foreach ($users as $user) :?>
+                  <?php if ($user->user_name == $logined) { ?>
+                    <?php if ($user->role == 3) { ?>
+                      <li>
+                        <a href="<?= base_url('events/add_msg/'.$records->event_id); ?>">指導</a>
+                      </li>
+                    <?php } else { ?>
+                      <li>
+                        <a href="<?= base_url('events/add_msg/'.$records->$event_id); ?>">處理</a>
+                      </li>
+                    <?php } ?>
+                  <?php } ?>
+              <?php endforeach; ?>
+            <?php } ?>
             <li class="dropdown">
-                <!-- data-toggle視窗切換 -->
-                <!-- aria-haspopup觸控暫留 -->
-                <!-- aria-expanded展開狀態 -->
+              <!-- data-toggle視窗切換 -->
+              <!-- aria-haspopup觸控暫留 -->
+              <!-- aria-expanded展開狀態 -->
               <a href="<?= base_url('events/index'); ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   小朋友
                   <!-- caret內均可再點入查詢 -->
@@ -89,7 +92,7 @@
               </ul>
             </li><!-- end of dropdown -->
           </ul><!--end of navbar-right -->
-        <?php } ?>
+        <?php } ?><!--end of login-validate -->
       </div><!-- /.container-fluid -->
     </nav><!--end of navbar-inverse -->
 

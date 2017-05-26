@@ -19,15 +19,15 @@
             <?php foreach ($records as $rec) :?>
                 <?php date_default_timezone_set("Asia/Taipei"); ?>
                 <tr>
-                    <td><?= $rec->id; ?></td>
+                    <td><?= $rec->event_id; ?></td>
                     <td>
-                        <a href="<?= base_url('events/show/'.$rec->id); ?>" class="btn btn-default"><?= $rec->name; ?></a>
+                        <a href="<?= base_url('events/show/'.$rec->event_id); ?>" class="btn btn-default"><?= $rec->event_name; ?></a>
                     </td>
-                    <td><?= $rec->user_id; ?></td>
+                    <td><?= $rec->user_name; ?></td>
                     <td><?= $rec->created_at; ?></td>
                     <td>
-                        <a href="<?= base_url('events/edit/'.$rec->id); ?>" class="btn btn-success">編輯</a>
-                        <a href="<?= base_url('events/delete/'.$rec->id); ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')">刪除</a>
+                        <a href="<?= base_url('events/edit/'.$rec->event_id); ?>" class="btn btn-success">編輯</a>
+                        <a href="<?= base_url('events/delete/'.$rec->event_id); ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')">刪除</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

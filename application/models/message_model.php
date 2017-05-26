@@ -23,7 +23,8 @@
             date_default_timezone_set("Asia/Taipei");
 
             $field = array(
-                'author' => $this->input->post('txt_hidden'),        
+                'event_id' => $this->input->post('hidden_event_id'),        
+                'user_name' => $this->input->post('hidden_user_name'),        
                 'info' => $this->input->post('txt_info'),
                 'created_at' => date('Y/m/d H:i:s')        // 創建時間
             );
@@ -39,6 +40,18 @@
         // 取得messages資料表$id的資料
         public function getDataById($id) {
             $this->db->where('id', $id);
+            $query = $this->db->get('messages');
+            if ($query->num_rows() > 0) {
+                return $query->row();
+            }
+            else {
+                return false;
+            }
+        }
+
+        // 取得messages資料表$event_id的資料
+        public function getDataByEventId($event_id) {
+            $this->db->where('event_id', $event_id);
             $query = $this->db->get('events');
             if ($query->num_rows() > 0) {
                 return $query->row();

@@ -1,10 +1,12 @@
 <div class="container">
   <div id="main" class="row">
+    <?php $username = $this->session->userdata('user'); ?>
     <form action="<?= base_url('events/submit') ?>" method="post" class="form-horizontal">
+        <input type="hidden" name="hidden_user_name" value="<?= $username; ?>">
         <div class="form-group">
             <label for="name" class="col-md-2 text-right">姓名：</label>
             <div class="col-md-4">
-                <input type="text" name="txt_name" class="form-control" required>
+                <input type="text" name="txt_event_name" class="form-control" required>
             </div>
             <label for="idnumber" class="col-md-2 text-right">證號：</label>
             <div class="col-md-4">
