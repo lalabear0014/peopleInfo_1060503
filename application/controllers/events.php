@@ -118,14 +118,12 @@
             redirect(base_url('events/show'));
         }
 
-        public function pdf() {
+        public function pdf($event_id) {
             $this->load->library('pdf');
-            /*
-                ---- ---- ---- ----
-                your code here
-                ---- ---- ---- ----
-            */
-            $this->load->view('events/pdfreport');
+            
+            $data['records'] = $this->em->getDataById($event_id);           
+            
+            $this->load->view('events/pdfreport', $data);
         }
 
         public function add_msg($event_id) {

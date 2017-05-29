@@ -164,10 +164,10 @@
             return $data;
         }
 
-        public function showMsg($id) {
-            $data['records'] = $this->em->getDataById($id);
+        public function showMsg($event_id) {
+            $data['records'] = $this->em->getDataById($event_id);
 
-            $config["base_url"] = base_url('events/show/'.$id);
+            $config["base_url"] = base_url('events/show/'.$event_id);
             $config["per_page"] = 5;
             $page = $this->uri->segment(4);
             $query1 = $this->db->get('messages', $config["per_page"], $page);

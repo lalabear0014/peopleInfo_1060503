@@ -58,7 +58,7 @@
             <!-- 確認點入event顯示頁面 -->
             <?php if ($show) { ?>
               <li>
-                <a href="<?= base_url('events/pdf'); ?>">檔案列印(PDF)</a> 
+                <a href="<?= base_url('events/pdf/'.$records->event_id); ?>">檔案列印(PDF)</a> 
               </li>
               <?php foreach ($users as $user) :?>
                   <?php if ($user->user_name == $logined) { ?>

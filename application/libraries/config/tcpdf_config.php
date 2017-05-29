@@ -69,7 +69,8 @@
  * Deafult image logo used be the default Header() method.
  * Please set here your own logo or an empty string to disable it.
  */
-//define ('PDF_HEADER_LOGO', '');
+// 若pass掉，預設LOGO有圖案
+define ('PDF_HEADER_LOGO', '');
 
 /**
  * Header logo image width in user units.
@@ -109,12 +110,14 @@ define ('PDF_AUTHOR', 'TCPDF');
 /**
  * Header title.
  */
-define ('PDF_HEADER_TITLE', 'TCPDF Example');
+// define ('PDF_HEADER_TITLE', 'TCPDF Example');
+define ('PDF_HEADER_TITLE', '');
 
 /**
  * Header description string.
  */
-define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
+// define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
+define ('PDF_HEADER_STRING', "嘰嘰喳喳(好久好久以後...)");
 
 /**
  * Document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch].
@@ -124,7 +127,7 @@ define ('PDF_UNIT', 'mm');
 /**
  * Header margin.
  */
-define ('PDF_MARGIN_HEADER', 5);
+define ('PDF_MARGIN_HEADER', 10);
 
 /**
  * Footer margin.
@@ -134,12 +137,12 @@ define ('PDF_MARGIN_FOOTER', 10);
 /**
  * Top margin.
  */
-define ('PDF_MARGIN_TOP', 27);
+define ('PDF_MARGIN_TOP', 25);
 
 /**
  * Bottom margin.
  */
-define ('PDF_MARGIN_BOTTOM', 25);
+define ('PDF_MARGIN_BOTTOM', 20);
 
 /**
  * Left margin.
@@ -154,12 +157,13 @@ define ('PDF_MARGIN_RIGHT', 15);
 /**
  * Default main font name.
  */
-define ('PDF_FONT_NAME_MAIN', 'helvetica');
+// define ('PDF_FONT_NAME_MAIN', 'helvetica');
+define ('PDF_FONT_NAME_MAIN', 'kaiu');
 
 /**
  * Default main font size.
  */
-define ('PDF_FONT_SIZE_MAIN', 10);
+define ('PDF_FONT_SIZE_MAIN', 12);
 
 /**
  * Default data font name.
