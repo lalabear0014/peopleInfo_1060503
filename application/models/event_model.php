@@ -170,8 +170,10 @@
             $config["base_url"] = base_url('events/show/'.$event_id);
             $config["per_page"] = 5;
             $page = $this->uri->segment(4);
+            $this->db->like('event_id', $event_id);
             $query1 = $this->db->get('messages', $config["per_page"], $page);
             $data["results"] = $query1->result();
+            $this->db->like('event_id', $event_id);
             $query2 = $this->db->get('messages');
             $config["total_rows"] = $query2->num_rows();
             $config['full_tag_open'] = '<u class="pagination">';
