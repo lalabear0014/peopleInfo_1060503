@@ -5,6 +5,7 @@
 
         public function __construst() {
             parent::__construst();
+            $this->load->model('event_model');            
             $this->load->model('user_model');
         }
        
@@ -59,9 +60,14 @@
 
         public function changePwd($name) {
             $this->load->model('user_model');
+            $this->load->model('event_model');
+            
+            $head['users'] = $this->user_model->getData();
+            $head['show'] = false;
+
             $data['records'] = $this->user_model->getDataByName($name);
             if (isset($_SESSION['user']) && ($_SESSION['user'] != "")) {
-                $this->load->view('template/header');
+                $this->load->view('template/header', $head);
                 $this->load->view('users/changepwd', $data);
                 $this->load->view('template/footer');
             }

@@ -81,20 +81,26 @@
 			<div class="form-group">
 				<label class="col-md-2 text-right">檔案上傳：</label>
 				<div class="col-md-10">
-					<form action="<?= site_url('events/upload'); ?>" method="post" class="dropzone" enctype="multipart/form-data" name="uploadData"></form>
+					<form action="<?= base_url('events/upload/'.$records->event_name); ?>" method="post" class="dropzone" enctype="multipart/form-data" name="uploadData">
+						<center>
+							<img alt="Feature image" draggable="false" height="52" src="<?= base_url('uploads/img/files-lg.svg'); ?>" width="204">
+						</center>
+					</form>
 				</div>
-				<label class="col-md-2 text-right">現有檔案：</label>
-				<div class="col-md-10">			
-					<?php $targetDir = "C:/xampp/htdocs/CodeIgniter-3.1.3/uploads/"; ?>
-					<?php $files = array_diff(scandir($targetDir), array('..', '.')); ?>
-					<?php $targetPath = site_url('uploads/'); ?>
+				<?php if (is_dir('C:/xampp/htdocs/CodeIgniter-3.1.3/uploads/'.$records->event_name)) { ?>
+					<label class="col-md-2 text-right">現有檔案：</label>
+					<div class="col-md-10">			
+						<?php
+							$targetDir = 'C:/xampp/htdocs/CodeIgniter-3.1.3/uploads/'.$records->event_name;
+							$files = array_diff(scandir($targetDir), array('..', '.'));
+							$targetPath = site_url('uploads/'.$records->event_name.'/');
 
-					<?php
-						foreach ($files as $value) {
-							echo "<a href='".$targetPath.$value."'>".$value."</a><br>";
-						}
-					?>
-				</div>
+							foreach ($files as $value) {
+								echo "<a href='".$targetPath.$value."'>".$value."</a><br>";
+							}
+						?>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane active" id="message">
