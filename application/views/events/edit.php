@@ -1,5 +1,6 @@
 <div class="container">
   <div id="main" class="row">
+    <?php $username = $this->session->userdata('user'); ?>
     <form action="<?= base_url('events/update/'.$username) ?>" method="post" class="form-horizontal">
         <!--傳送隱藏訊息(id)-->
         <input type="hidden" name="hidden_event_id" value="<?= $records->event_id; ?>">
@@ -120,7 +121,7 @@
             <label for="name" class="col-md-2 text-right"></label>
             <div class="col-md-10">
                 <input type="submit" name="btnUpdate" class="btn btn-primary" value="Update">
-                <a href="<?= base_url('events/index') ?>" class="btn btn-primary">Back</a>
+                <a href="<?= base_url('events/index/'.$username) ?>" class="btn btn-primary">Back</a>
             </div>
         </div>
     </form>

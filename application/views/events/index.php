@@ -11,8 +11,10 @@
             <tr>
                 <th>項次</th>
                 <th>人員</th>
+                <th>駐地</th>
                 <th>參謀</th>
                 <th>創建時間</th>
+                <th>留言數</th>
                 <th>功能</th>
             </tr>
             <?php foreach ($records as $rec) :?>
@@ -22,11 +24,17 @@
                     <td>
                         <a href="<?= base_url('events/show/'.$rec->event_id); ?>" class="btn btn-default"><?= $rec->event_name; ?></a>
                     </td>
-                    <td><?= $rec->user_name; ?></td>
+                    <td><?= $rec->station; ?></td>
+                    <?php foreach ($users as $user) :?>
+                        <?php if ($rec->user_name == $user->user_name) {
+                           echo "<td>".($user->fullname)."</td>";
+                        }?>
+                    <?php endforeach; ?>
                     <td><?= $rec->created_at; ?></td>
+                    <td>1</td>
                     <td>
                         <a href="<?= base_url('events/edit/'.$rec->event_id); ?>" class="btn btn-success">編輯</a>
-                        <a href="<?= base_url('events/delete/'.$rec->event_id); ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')">刪除</a>
+                        <!--<a href="<?= base_url('events/delete/'.$rec->event_id); ?>" class="btn btn-danger" onclick="return confirm('Are you sure?')">刪除</a>-->
                     </td>
                 </tr>
             <?php endforeach; ?>

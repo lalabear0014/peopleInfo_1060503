@@ -125,6 +125,8 @@
 
         // 取得events資料表的資料進行分頁
         public function page($keyword, $username) {
+            $this->load->model('user_model', 'um');
+            $data['users'] = $this->um->getData();
             $config['base_url'] = base_url('events/index/'.$username);
             // 每頁?筆資料
             $config['per_page'] = 5;
