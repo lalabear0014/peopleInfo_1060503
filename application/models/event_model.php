@@ -52,9 +52,21 @@
             }
         }
 
-        // 取得events資料表$id的資料
+        // 取得events資料表$event_id的資料
         public function getDataById($event_id) {
             $this->db->where('event_id', $event_id);
+            $query = $this->db->get('events');
+            if ($query->num_rows() > 0) {
+                return $query->row();
+            }
+            else {
+                return false;
+            }
+        }
+
+        // 取得events資料表$user_name的資料
+        public function getDataByName($user_name) {
+            $this->db->where('user_name', $user_name);
             $query = $this->db->get('events');
             if ($query->num_rows() > 0) {
                 return $query->row();
@@ -112,13 +124,15 @@
         }
 
         // 取得events資料表的資料進行分頁
-        public function page($keyword) {
-            $config['base_url'] = base_url('events/index');
+        public function page($keyword, $username) {
+            $config['base_url'] = base_url('events/index/'.$username);
             // 每頁?筆資料
             $config['per_page'] = 5;
-            $page = $this->uri->segment(3);
+            $page = $this->uri->segment(4);
             
+            $this->db->where('user_name', $username);
             $query1 = $this->db->get('events', $config["per_page"], $page);
+            $this->db->where('user_name', $username);
             $query2 = $this->db->get('events');
 
             // search_keyword

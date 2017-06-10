@@ -1,7 +1,7 @@
 <div class="container">
   <div id="main" class="row">
     <?php $username = $this->session->userdata('user'); ?>
-    <form action="<?= base_url('events/submit') ?>" method="post" class="form-horizontal">
+    <form action="<?= base_url('events/submit/'.$username) ?>" method="post" class="form-horizontal">
         <input type="hidden" name="hidden_user_name" value="<?= $username; ?>">
         <div class="form-group">
             <label for="name" class="col-md-2 text-right">姓名：</label>

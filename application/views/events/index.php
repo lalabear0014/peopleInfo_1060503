@@ -4,7 +4,6 @@
         redirect(base_url('users/index'));
     }
 ?>
-
 <div class="container">
   <div id="main" class="row">
     <table class="table table-bordered">

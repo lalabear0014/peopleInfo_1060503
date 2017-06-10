@@ -42,7 +42,7 @@
                     'ip_address' => $this->input->ip_address()
                 );
                 $this->session->set_userdata($sessionText);
-                redirect(base_url('events/index'));
+                redirect(base_url('events/index/'.$username));
             } else {
                 $Message['username'] = $username;
                 $Message['errorMessage'] = "user account and password isn't correct";

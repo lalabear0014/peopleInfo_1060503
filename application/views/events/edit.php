@@ -1,6 +1,6 @@
 <div class="container">
   <div id="main" class="row">
-    <form action="<?= base_url('events/update') ?>" method="post" class="form-horizontal">
+    <form action="<?= base_url('events/update/'.$username) ?>" method="post" class="form-horizontal">
         <!--傳送隱藏訊息(id)-->
         <input type="hidden" name="hidden_event_id" value="<?= $records->event_id; ?>">
         <div class="form-group">

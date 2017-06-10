@@ -11,15 +11,23 @@
             $this->load->library('pagination');
         }
 
-        public function index() {
+        public function index($username) {
             // user_list
+            // $current_user['item'] = $this->um->getDataByName($username);
+            // if ($current_user['item']->role > 1) {
+            //     $head['users'] = $this->um->getData();
+            // }
+            // else {
+            //     $head['users'] = $current_user['item'];
+            // }
             $head['users'] = $this->um->getData();
             $head['records'] = $this->em->getData();
             $head['show'] = false;
 
             // pagination
             $keyword = $this->input->post('keyword');
-            $data = $this->em->page($keyword);           
+            $data = $this->em->page($keyword, $username);
+            // $data['current'] = $this->em->getDataByName($username);      
 
             $this->load->view('template/header', $head);    // $user['users']
             $this->load->view('events/index', $data);       // $data["records"], $data["links"]
@@ -58,7 +66,7 @@
             $this->load->view('template/footer');
         }
 
-        public function submit() {
+        public function submit($username) {
             $result = $this->em->submit();
             if ($result) {
                 $this->session->set_flashdata('success_msg', 'Record added successfully');
@@ -66,7 +74,7 @@
             else {
                 $this->session->set_flashdata('error_msg', 'Fail to add record');
             }
-            redirect(base_url('events/index'));
+            redirect(base_url('events/index/'.$username));
         }
 
         public function edit($event_id) {
@@ -80,7 +88,7 @@
             $this->load->view('template/footer');
         }
 
-        public function update() {
+        public function update($username) {
             $result = $this->em->update();
             if ($result) {
                 $this->session->set_flashdata('success_msg', 'Record updated successfully');
@@ -88,7 +96,7 @@
             else {
                 $this->session->set_flashdata('error_msg', 'Fail to update record');
             }
-            redirect(base_url('events/index'));
+            redirect(base_url('events/index/'.$username));
         }
 
         public function delete($event_id) {
