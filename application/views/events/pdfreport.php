@@ -4,10 +4,10 @@
       $pdf=new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
       // set document information
       $pdf->SetCreator(PDF_CREATOR);
-      //$pdf->SetAuthor('Nicola Asuni');
-      //$pdf->SetTitle('TCPDF Example 005');
-      //$pdf->SetSubject('TCPDF Tutorial');
-      //$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+      // $pdf->SetAuthor('Nicola Asuni');
+      // $pdf->SetTitle('TCPDF Example 005');
+      // $pdf->SetSubject('TCPDF Tutorial');
+      // $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
       // set default header data
       $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.'', PDF_HEADER_STRING);
       // set header and footer fonts
@@ -41,10 +41,13 @@
       $style = array('width' => 2, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
 
       // Line
-      $pdf->Line(20, 0, 0, 20, $style);
-      $pdf->Line(30, 0, 0, 30, $style);
+      $pdf->Line(30, -10, -10, 30, $style);
+      $pdf->Line(40, -10, -10, 40, $style);
 
       /// create some HTML content
+      if (!$records->updated_at) {
+            $records->updated_at = $records->created_at;
+      }
       $html =
       '<div width="640" colspan="4" align="right"><font size="12">製表日期：'.$records->updated_at.'</font></div>
       <table width="650" bgcolor="black" border="1">
@@ -113,7 +116,7 @@
       // output the HTML content
       $pdf->writeHTML($html, true, false, true, false, '');
 
-      //$pdf->Ln(5);
+      // $pdf->Ln(5);
 
       //Close and output PDF document
       $date = date('YmdHis');

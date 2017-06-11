@@ -158,6 +158,7 @@ define ('PDF_MARGIN_RIGHT', 15);
  * Default main font name.
  */
 // define ('PDF_FONT_NAME_MAIN', 'helvetica');
+// 預設標楷體
 define ('PDF_FONT_NAME_MAIN', 'kaiu');
 
 /**
