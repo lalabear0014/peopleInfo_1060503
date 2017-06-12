@@ -43,7 +43,7 @@
             
             if ($newpwd == $confirmpwd) {
                 $field = array(
-                    'password' => $this->input->post('NewPassword'),
+                    'password' => hash('sha256', $this->input->post('NewPassword')),
                     'updated_at' => date('Y/m/d H:i:s')        // 更新時間
                 );
                 $this->db->where('user_name', $name);

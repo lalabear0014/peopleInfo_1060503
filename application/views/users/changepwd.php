@@ -5,7 +5,7 @@
             <div class="panel-body">     
             <!-- Login Form -->
             <form action="<?= base_url('users/updatePwd') ?>" method="post" role="form">
-				<?php $logined = $this->session->userdata('user'); ?>
+                <?php $logined = $this->session->userdata('user'); ?>			
 				<input type="hidden" name="txt_hidden" value="<?= $logined; ?>">
 				<!-- OldPassword Field -->
                 <div class="row">
