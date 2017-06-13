@@ -1,7 +1,28 @@
 <?php
+      class MYPDF extends TCPDF {
+            //Page header
+            public function Header() {
+                  $this->SetY(20);
+                  // Set font
+                  $this->SetFont('kaiu', 'B', 12);
+                  // Title
+                  $this->Cell(0, 15, '嘰嘰喳喳(好久好久以後...)', 0, false, 'L', 0, '', 0, false, 'M', 'M');
+            }
+
+            // Page footer
+            public function Footer() {
+                  // Position at 15 mm from bottom
+                  $this->SetY(-15);
+                  // Set font
+                  $this->SetFont('kaiu', 'I', 12);
+                  // Page number
+                  $this->Cell(0, 14, '第'.$this->getAliasNumPage().'頁，共'.$this->getAliasNbPages().'頁', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+            }
+      }
+      
       /// extend TCPF with custom functions
       // create new PDF document
-      $pdf=new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+      $pdf=new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
       // set document information
       $pdf->SetCreator(PDF_CREATOR);
       // $pdf->SetAuthor('Nicola Asuni');

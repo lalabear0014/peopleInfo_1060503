@@ -117,7 +117,7 @@ define ('PDF_HEADER_TITLE', '');
  * Header description string.
  */
 // define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
-define ('PDF_HEADER_STRING', "嘰嘰喳喳(好久好久以後...)");
+//define ('PDF_HEADER_STRING', "嘰嘰喳喳(好久好久以後...)");
 
 /**
  * Document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch].
