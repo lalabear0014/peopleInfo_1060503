@@ -13,14 +13,15 @@
             public function Footer() {
                   // Position at 15 mm from bottom
                   $this->SetY(-15);
+                  $this->SetX(90);
                   // Set font
                   $this->SetFont('kaiu', 'I', 12);
                   // Page number
-                  $this->Cell(0, 14, '第'.$this->getAliasNumPage().'頁，共'.$this->getAliasNbPages().'頁', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+                  $this->Cell(0, 14, '第'.$this->getAliasNumPage().'頁，共'.$this->getAliasNbPages().'頁', 0, false, 'L', 0, '', 0, false, 'T', 'M');
             }
       }
       
-      /// extend TCPF with custom functions
+      // extend TCPF with custom functions
       // create new PDF document
       $pdf=new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
       // set document information
