@@ -81,22 +81,23 @@
 			<div class="form-group">
 				<label class="col-md-2 text-right">檔案上傳：</label>
 				<div class="col-md-10">
-					<form action="<?= base_url('events/upload/'.$records->event_name); ?>" method="post" class="dropzone" enctype="multipart/form-data" name="uploadData">
+					<form action="<?= base_url('events/upload/'.$records->event_id); ?>" method="post" class="dropzone" enctype="multipart/form-data" name="uploadData">
 						<center>
 							<img alt="Feature image" draggable="false" height="52" src="<?= base_url('uploads/img/files-lg.svg'); ?>" width="204">
 						</center>
 					</form>
 				</div>
-				<?php if (is_dir('C:/xampp/htdocs/CodeIgniter-3.1.3/uploads/'.$records->event_name)) { ?>
+				<?php if (is_dir('uploads/'.$records->event_id)) { ?>
 					<label class="col-md-2 text-right">現有檔案：</label>
 					<div class="col-md-10">			
 						<?php
-							$targetDir = 'C:/xampp/htdocs/CodeIgniter-3.1.3/uploads/'.$records->event_name;
+							$targetDir = 'uploads/'.$records->event_id;
 							$files = array_diff(scandir($targetDir), array('..', '.'));
-							$targetPath = site_url('uploads/'.$records->event_name.'/');
+							$targetPath = 'uploads/'.$records->event_id.'/';
 
 							foreach ($files as $value) {
-								echo "<a href='".$targetPath.$value."'>".$value."</a><br>";
+								$file = iconv('big5','utf-8', $value);
+								echo "<a href='../../".$targetPath.$file."'>".$file."</a><br>";
 							}
 						?>
 					</div>

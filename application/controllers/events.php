@@ -110,16 +110,16 @@
             redirect(base_url('events/index'));
         }
 
-        public function upload($event_name) {
-            if (!is_dir('uploads/'.$event_name)) {
-                mkdir('./uploads/'.$event_name, 0777, TRUE);
+        public function upload($event_id) {
+            if (!is_dir('uploads/'.$event_id)) {
+                mkdir('./uploads/'.$event_id, 777, TRUE);
             }
 
             if (!empty($_FILES)) {
                 $tempFile = $_FILES['file']['tmp_name'];
-                $fileName = $_FILES['file']['name'];
+                $fileName = iconv('utf-8','big5', $_FILES["file"]["name"]);
                 $fileNameElement = explode('.', $fileName);
-                $targetPath = getcwd().'/uploads/'.$event_name.'/';
+                $targetPath = getcwd().'/uploads/'.$event_id.'/';                
                 $targetFile = $targetPath.$fileNameElement[0].date('YmdHis').'.'.$fileNameElement[1];
                 move_uploaded_file($tempFile, $targetFile);
                 // if you want to save in db,where here
