@@ -66,10 +66,18 @@
 
         // 取得events資料表$user_name的資料
         public function getDataByName($user_name) {
+            $this->load->model('user_model', 'um');
+            $result = $this->um->getDataByName($user_name);
+            var_dump($result);
             $this->db->where('user_name', $user_name);
             $query = $this->db->get('events');
             if ($query->num_rows() > 0) {
-                return $query->row();
+                if ($result[0]->role == 1) {
+                    return $query->row();
+                }
+                else {
+                    return $this->em->getData();
+                }
             }
             else {
                 return false;
@@ -124,9 +132,10 @@
         }
 
         // 取得events資料表的資料進行分頁
-        public function page($keyword, $username) {
-            $this->load->model('user_model', 'um');
-            $data['users'] = $this->um->getData();
+        public function page($keyword, $username, $role) {
+            // $this->load->model('user_model', 'um');
+            // $data['users'] = $this->um->getData();
+            
             $config['base_url'] = base_url('events/index/'.$username);
             // 每頁?筆資料
             $config['per_page'] = 5;
@@ -141,8 +150,10 @@
             $keyword = $this->input->post('keyword');
             if ($keyword) {
                 // $data['records'] = $this->em->search($keyword);
+                if ($role == 1) {$this->db->where('user_name', $username); }
                 $this->db->like('event_name', $keyword);
                 $query1 = $this->db->get('events', $config["per_page"], $page);
+                if ($role == 1) {$this->db->where('user_name', $username); }
                 $this->db->like('event_name', $keyword);
                 $query2 = $this->db->get('events');
             }

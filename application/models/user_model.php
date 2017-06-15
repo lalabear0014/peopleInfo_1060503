@@ -23,11 +23,16 @@
             return ($query->num_rows() == 1);
         }
 
-        public function getDataByName($name) {
+        public function getDataByName($name, $role) {
             $this->db->where('user_name', $name);
             $query = $this->db->get('users');
             if ($query->num_rows() > 0) {
-                return $query->row();
+                if ($role == 1) {
+                    return $query->result();
+                }
+                else {
+                    return $this->um->getData();
+                }
             }
             else {
                 return false;
@@ -56,6 +61,19 @@
                 }
             } 
         }
+
+        public function getRole($username) {
+            $this->db->where('user_name', $username);
+            $query = $this->db->get('users');
+            if ($query->num_rows() > 0) {
+                $result = $query->result();
+                return $result[0]->role;
+            }
+            else {
+                return false;
+            }
+        }
+
 
     }
 ?>

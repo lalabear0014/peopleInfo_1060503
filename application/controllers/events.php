@@ -13,20 +13,15 @@
 
         public function index($username) {
             // user_list
-            // $current_user['item'] = $this->um->getDataByName($username);
-            // if ($current_user['item']->role > 1) {
-            //     $head['users'] = $this->um->getData();
-            // }
-            // else {
-            //     $head['users'] = $current_user['item'];
-            // }
-            $head['users'] = $this->um->getData();
+            $logined = $this->session->userdata('user');
+            $head['role'] = $this->um->getRole($logined);
             $head['records'] = $this->em->getData();
+            $head['users'] = $this->um->getDataByName($username, $head['role']);
             $head['show'] = false;
 
             // pagination
             $keyword = $this->input->post('keyword');
-            $data = $this->em->page($keyword, $username);
+            $data = $this->em->page($keyword, $username, $head['role']);
             // $data['current'] = $this->em->getDataByName($username);      
 
             $this->load->view('template/header', $head);    // $user['users']
@@ -44,8 +39,10 @@
 
         public function show($event_id) {
             // user_list
-            $head['users'] = $this->um->getData();
-            $head['records'] = $this->em->getDataById($event_id);
+            $logined = $this->session->userdata('user');
+            $head['role'] = $this->um->getRole($logined);
+            $head['records'] = $this->em->getData();
+            $head['users'] = $this->um->getDataByName($logined, $head['role']);
             $head['show'] = true;
 
             $data = $this->em->showMsg($event_id);           
@@ -57,11 +54,14 @@
 
         public function add() {
             // user_list
-            $user['users'] = $this->um->getData();
-            $user['show'] = false;
+            $logined = $this->session->userdata('user');
+            $head['role'] = $this->um->getRole($logined);
+            $head['records'] = $this->em->getData();
+            $head['users'] = $this->um->getDataByName($logined, $head['role']);
+            $head['show'] = false;
             
             $data['records'] = $this->em->getData();
-            $this->load->view('template/header', $user);
+            $this->load->view('template/header', $head);
             $this->load->view('events/add', $data);
             $this->load->view('template/footer');
         }
@@ -79,11 +79,14 @@
 
         public function edit($event_id) {
             // user_list
-            $user['users'] = $this->um->getData();
-            $user['show'] = false;
+            $logined = $this->session->userdata('user');
+            $head['role'] = $this->um->getRole($logined);
+            $head['records'] = $this->em->getData();
+            $head['users'] = $this->um->getDataByName($logined, $head['role']);
+            $head['show'] = false;
 
             $data['records'] = $this->em->getDataById($event_id);
-            $this->load->view('template/header', $user);
+            $this->load->view('template/header', $head);
             $this->load->view('events/edit', $data);
             $this->load->view('template/footer');
         }

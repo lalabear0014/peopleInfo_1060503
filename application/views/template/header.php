@@ -60,17 +60,13 @@
             <!-- 確認點入event顯示頁面 -->
             <?php if ($show) { ?>
               <li>
-                <a href="<?= base_url('events/pdf/'.$records->event_id); ?>">檔案列印(PDF)</a> 
+                <a href="<?= base_url('events/pdf/'.$records[0]->event_id); ?>">檔案列印(PDF)</a> 
               </li>
-              <?php foreach ($users as $user) :?>
-                  <?php if ($user->user_name == $logined) { ?>
-                    <?php if ($user->role > 1) { ?>
-                      <li><a href="<?= base_url('events/add_msg/'.$records->event_id); ?>">指導</a></li>
-                    <?php } else { ?>
-                      <li><a href="<?= base_url('events/add_msg/'.$records->$event_id); ?>">處理</a></li>
-                    <?php } ?>
-                  <?php } ?>
-              <?php endforeach; ?>
+              <?php if ($role[0] > 1) {?>
+                <li><a href="<?= base_url('events/add_msg/'.$records[0]->event_id); ?>">指導</a></li>
+              <?php } else {?>
+                <li><a href="<?= base_url('events/add_msg/'.$records[0]->event_id); ?>">處理</a></li>
+              <?php } ?>
             <?php } ?>
             <li class="dropdown">
               <!-- data-toggle視窗切換 -->
@@ -87,8 +83,6 @@
                 <?php foreach ($users as $user) :?>
                   <li><a href="<?= base_url('events/index/'.$user->user_name); ?>"><?= $user->fullname; ?></a></li>
                 <?php endforeach; ?>
-                
-                
               </ul>
             </li><!-- end of dropdown -->
           </ul><!--end of navbar-right -->
