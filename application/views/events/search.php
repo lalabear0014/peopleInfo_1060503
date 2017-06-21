@@ -19,6 +19,8 @@
                 <?php date_default_timezone_set("Asia/Taipei"); ?>
                 <tr>
                     <td>
+                        <?php if($rec->hash_event_name){echo "success";}
+                        else{echo "fail";}  ?>
                         <a href="<?= base_url('events/show/'.$rec->hash_event_name); ?>" class="btn btn-default"><?= $rec->event_name; ?></a>
                     </td>
                     <td><?= $rec->station; ?></td>

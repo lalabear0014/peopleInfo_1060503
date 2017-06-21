@@ -7,7 +7,7 @@
         <div class="form-group">
             <label for="name" class="col-md-2 text-right">姓名：</label>
             <div class="col-md-4">
-                <input type="text" name="txt_event_name" class="form-control" value="<?= $records->event_name; ?>" required>
+                <?= $records->event_name; ?>
             </div>
             <label for="idnumber" class="col-md-2 text-right">證號：</label>
             <div class="col-md-4">

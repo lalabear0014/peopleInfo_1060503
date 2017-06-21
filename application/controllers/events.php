@@ -20,8 +20,7 @@
             $head['show'] = false;
 
             // pagination
-            $keyword = $this->input->post('keyword');
-            $data = $this->em->page($keyword, $username, $head['role']);
+            $data = $this->em->page($username, $head['role']);
             // $data['current'] = $this->em->getDataByName($username);      
 
             $this->load->view('template/header', $head);    // $user['users']
@@ -35,6 +34,32 @@
             // $total_rows = $this->em->record_count();
             // $config["total_rows"] = $total_rows;
             // $data["results"] = $this->em->fetch_data($config["per_page"], $page);
+        }
+
+        public function search($username) {
+           // user_list
+            $logined = $this->session->userdata('user');
+            $head['role'] = $this->um->getRole($logined);
+            $head['records'] = $this->em->getData();
+            $head['users'] = $this->um->getDataByName($username, $head['role']);
+            $head['show'] = false;
+
+            // pagination
+            $newKeyword = $this->input->post('keyword');
+            if ($newKeyword) {
+                $this->session->unset_userdata('keyword');
+                $sessionText = array( 'keyword' => $newKeyword );
+                $this->session->set_userdata($sessionText);
+                $data = $this->em->page_keyword($newKeyword, $username, $head['role']);
+            }
+            else {
+                $lastKeyword = $this->session->userdata('keyword');
+                $data = $this->em->page_keyword($lastKeyword, $username, $head['role']);
+            }
+
+            $this->load->view('template/header', $head);    // $user['users']
+            $this->load->view('events/index', $data);       // $data["records"], $data["links"]
+            $this->load->view('template/footer');
         }
 
         public function show($hash_event_name) {

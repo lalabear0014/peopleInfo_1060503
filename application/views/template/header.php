@@ -45,9 +45,7 @@
           <!-- Search -->
           <div class="navbar-form navbar-left">
             <div class="form-group">
-              <?php foreach ($users as $user) :?>
-                <form action="<?= base_url('events/index/'.$user->user_name); ?>" method="post">     
-              <?php endforeach; ?>
+              <form action="<?= base_url('events/search/'.$logined); ?>" method="post">
                 <input class="form-control" type="text" name="keyword" placeholder="search">
                 <button type="submit" class="btn btn-danger">
                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
