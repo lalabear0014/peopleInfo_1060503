@@ -31,7 +31,8 @@
                     return $query->result();
                 }
                 else {
-                    return $this->um->getData();
+                    $this->load->model('user_model');
+                    return $this->user_model->getData();
                 }
             }
             else {

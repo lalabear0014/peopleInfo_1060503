@@ -74,12 +74,14 @@
         public function changePwd($username) {
             $this->load->model('user_model');
             $this->load->model('event_model');
-            
-            $head['users'] = $this->user_model->getData();
+
+            $logined = $this->session->userdata('user');
+            $head['role'] = $this->user_model->getRole($logined);
             $head['records'] = $this->event_model->getData();
+            $head['users'] = $this->user_model->getDataByName($username, $head['role']);
             $head['show'] = false;
 
-            $data['records'] = $this->user_model->getDataByName($username);
+            $data['records'] = $this->user_model->getDataByName($username, $head['role']);
             if (isset($_SESSION['user']) && ($_SESSION['user'] != "")) {
                 $this->load->view('template/header', $head);
                 $this->load->view('users/changepwd', $data);

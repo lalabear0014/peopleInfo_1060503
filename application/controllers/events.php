@@ -37,15 +37,15 @@
             // $data["results"] = $this->em->fetch_data($config["per_page"], $page);
         }
 
-        public function show($event_id) {
+        public function show($hash_event_name) {
             // user_list
             $logined = $this->session->userdata('user');
             $head['role'] = $this->um->getRole($logined);
-            $head['records'] = $this->em->getData();
+            $head['records'] = $this->em->getDataByHashName($hash_event_name);
             $head['users'] = $this->um->getDataByName($logined, $head['role']);
             $head['show'] = true;
 
-            $data = $this->em->showMsg($event_id);           
+            $data = $this->em->showMsg($hash_event_name);           
 
             $this->load->view('template/header', $head);
             $this->load->view('events/show', $data);
@@ -147,13 +147,14 @@
             $head['records'] = $this->em->getDataById($event_id);
             $head['show'] = false;
 
-            $data['records'] = $this->mm->getDataByEventId($event_id);
+            // $data['records'] = $this->mm->getDataByEventId($event_id);
+            $data['records'] = $this->em->getDataById($event_id);
             $this->load->view('template/header', $head);
             $this->load->view('events/addmsg', $data);
             $this->load->view('template/footer');
         }
 
-        public function submit_msg($event_id) {
+        public function submit_msg($hash_event_name) {
             $result = $this->mm->submit();
             if ($result) {
                 $this->session->set_flashdata('success_msg', 'Record added messages successfully');
@@ -161,7 +162,7 @@
             else {
                 $this->session->set_flashdata('error_msg', 'Fail to add message');
             }
-            redirect(base_url('events/show/'.$event_id));
+            redirect(base_url('events/show/'.$hash_event_name));
         }
 
     }

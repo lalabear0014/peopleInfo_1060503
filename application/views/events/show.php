@@ -63,19 +63,44 @@
 		</div>
 
 		<div role="tabpanel" class="tab-pane" id="process">
-			<?= $records->process; ?>
+			<div class="form-group">
+				<label class="col-md-1 text-right"></label>
+				<div class="col-md-11">
+					<?= $records->process; ?>
+				</div>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="assess">
-			<?= $records->assess; ?>
+			<div class="form-group">
+				<label class="col-md-1 text-right"></label>
+				<div class="col-md-11">
+					<?= $records->assess; ?>
+				</div>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="use">
-			<?= $records->use; ?>	
+			<div class="form-group">
+				<label class="col-md-1 text-right"></label>
+				<div class="col-md-11">
+					<?= $records->use; ?>
+				</div>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="money">
-			<?= $records->money; ?>
+			<div class="form-group">
+				<label class="col-md-1 text-right"></label>
+				<div class="col-md-11">
+					<?= $records->money; ?>
+				</div>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="effect">
-			<?= $records->effect; ?>	
+			<div class="form-group">
+				<label class="col-md-1 text-right"></label>
+				<div class="col-md-11">
+					<?= $records->effect; ?>
+				</div>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="upload">
 			<div class="form-group">
@@ -113,13 +138,17 @@
 						<th>作者</th>
 						<th>創建時間</th>
 					</tr>
-					<?php foreach ($results as $rec) :?>
+					<?php foreach ($results as $res) : ?>
 						<?php date_default_timezone_set("Asia/Taipei"); ?>
 						<tr>
-							<td><?= $rec->id; ?></td>
-							<td><?= $rec->info; ?></td>
-							<td><?= $rec->user_name; ?></td>
-							<td><?= $rec->created_at; ?></td>	
+							<td><?= $res->id; ?></td>
+							<td><?= $res->info; ?></td>
+							<?php foreach ($users as $user) {
+								if ($res->user_name == $user->user_name) {
+									echo "<td>".$user->fullname."</td>";
+								}
+							}?>
+							<td><?= $res->created_at; ?></td>	
 						</tr>
 					<?php endforeach; ?>
 				</thead>
